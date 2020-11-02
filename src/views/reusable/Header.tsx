@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import {Layout, Row, Typography} from 'antd'
 import styled from 'styled-components'
 import Import from '@/views/components/Import'
@@ -11,9 +11,8 @@ const StyledTitle = styled(Typography.Title).attrs({level: 2})`
   margin-bottom: 0 !important;
 `
 
-const Header: React.FC = () => {
-
-  return (
+const Header: React.FC = () =>
+  (
     <StyledHeader>
       <Row justify="space-between" align="middle">
         <StyledTitle>Films store</StyledTitle>
@@ -21,6 +20,6 @@ const Header: React.FC = () => {
       </Row>
     </StyledHeader>
   )
-}
 
-export default Header
+
+export default memo(Header)
