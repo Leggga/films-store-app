@@ -32,6 +32,8 @@ const AddFilmModal: React.FC<Props> = ({isVisible, onChangeVisible}) => {
     const values = form.getFieldsValue()
     const film: FilmTemp = {...values, release_year: values.release_year.get('year')}
     dispatch(addFilmRequest(film))
+
+    form.resetFields()
     onChangeVisible(false)
   }, [dispatch, onChangeVisible, form])
 
