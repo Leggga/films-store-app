@@ -1,5 +1,6 @@
 import {SortOrder} from 'antd/es/table/interface'
-import {filmFormats} from '@/store/ducks/films/index'
+
+export const filmFormats = {'VHS': 'VHS', 'DVD': 'DVD', 'Blu-Ray': 'Blu-Ray'}
 
 export type FilmsFormat = keyof typeof filmFormats
 

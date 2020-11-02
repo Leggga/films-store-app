@@ -2,7 +2,6 @@ import {ActionType, createReducer} from 'typesafe-actions'
 import {FilmsState} from '@/store/ducks/films/types'
 import * as actions from './actions'
 
-export const filmFormats = {'VHS': 'VHS', 'DVD': 'DVD', 'Blu-Ray': 'Blu-Ray'}
 export type FilmsActions = ActionType<typeof actions>
 
 const initialState: FilmsState = {

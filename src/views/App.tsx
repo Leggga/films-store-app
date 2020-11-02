@@ -7,8 +7,7 @@ import SearchPanel from '@/views/components/SearchPanel'
 //redux
 import {getFilmsRequest} from '@/store/ducks/films/actions'
 
-
-const MainPage: React.FC = () => {
+const App: React.FC = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -25,4 +24,4 @@ const MainPage: React.FC = () => {
   )
 }
 
-export default MainPage
+export default App
