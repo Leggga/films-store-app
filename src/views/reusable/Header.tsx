@@ -1,7 +1,7 @@
 import React from 'react'
 import {Layout, Row, Typography} from 'antd'
 import styled from 'styled-components'
-import Import from '@/views/reusable/Import'
+import Import from '@/views/components/Import'
 
 const StyledHeader = styled(Layout.Header)`
   background: #fff;

@@ -1,25 +1,27 @@
+import {SortOrder} from 'antd/es/table/interface'
 import {filmFormats} from '@/store/ducks/films/index'
 
 export type FilmsFormat = keyof typeof filmFormats
 
-export type FilmType = {
-  id: number
+export interface FilmTemp {
   title: string
   release_year: number
   format: FilmsFormat
   stars: string[]
 }
 
-export type SortOrder = 'desc' | 'asc' | 'natural'
+export interface Film extends FilmTemp{
+  id: string
+}
 
 export type Filter = {
-  sortOrder: SortOrder
   byTitle: string
-  byAuthor: string
+  byStars: string
 }
 
 export type FilmsState = Readonly<{
-  list: FilmType[]
+  list: Film[]
   filters: Filter
+  sortOrder?: SortOrder
   isLoading: boolean
 }>
