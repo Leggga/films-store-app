@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 //components
-import {Table, Tag} from 'antd'
+import {Popconfirm, Table, Tag} from 'antd'
 import Button from 'antd/es/button'
 import Column from 'antd/es/table/Column'
 //types
@@ -59,7 +59,14 @@ const FilmsTable: React.FC = () => {
   )
   const renderAction = useCallback(
     (_, record) => (
-      <Button onClick={() => handleRemove(record)}>Remove</Button>
+      <Popconfirm
+        title='Are you sure remove this film?'
+        onConfirm={() => handleRemove(record)}
+        okText='Yes'
+        cancelText='No'
+      >
+        <Button>Remove</Button>
+      </Popconfirm>
     ),
     [handleRemove]
   )

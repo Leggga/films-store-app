@@ -48,7 +48,24 @@ const AddFilmModal: React.FC<Props> = ({isVisible, onChangeVisible}) => {
   const disabledDate = useCallback(
     (date: Moment): boolean =>
       date.isAfter(moment().endOf('year')) ||
-      date.isBefore(new Date(1900, 0)),
+      date.isBefore(new Date(1850, 0)),
+    []
+  )
+
+  const listValidator = useCallback(
+    async (_, stars: string[] | undefined) => {
+      if (!stars || !stars.length) {
+        return Promise.reject(new Error('At least 1 star'))
+      } else {
+        const normalizedStars = stars.reduce((acc: string[], star) => {
+          star && acc.push(star.toLowerCase().replace(/ +/g, ''))
+          return acc
+        }, [])
+        if (new Set(normalizedStars).size !== normalizedStars.length) {
+          return Promise.reject(new Error('Stars not unique'))
+        }
+      }
+    },
     []
   )
 
@@ -86,11 +103,7 @@ const AddFilmModal: React.FC<Props> = ({isVisible, onChangeVisible}) => {
           name='release_year'
           rules={[{required: true, message: 'Please choose year!'}]}
         >
-          <DatePicker
-            picker='year'
-            disabledDate={disabledDate}
-            onChange={() => console.log('change')}
-          />
+          <DatePicker picker='year' disabledDate={disabledDate} />
         </Form.Item>
 
         <Form.Item
@@ -105,18 +118,7 @@ const AddFilmModal: React.FC<Props> = ({isVisible, onChangeVisible}) => {
           </Select>
         </Form.Item>
 
-        <Form.List
-          name='stars'
-          rules={[
-            {
-              validator: async (_, stars) => {
-                if (!stars || !stars.length) {
-                  return Promise.reject(new Error('At least 1 star'))
-                }
-              },
-            },
-          ]}
-        >
+        <Form.List name='stars' rules={[{validator: listValidator}]}>
           {(fields, {add, remove}, {errors}) => (
             <>
               {fields.map((field, index) => (
